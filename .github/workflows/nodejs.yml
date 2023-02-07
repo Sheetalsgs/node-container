@@ -23,5 +23,11 @@ jobs:
         registry: nodejsconatiner.azurecr.io/
         username: ${{ secrets.AzureAppService_ContainerUsername}}
         password: ${{ secrets.AzureAppService_ContainerPassword}}
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: nodejsconatiner.azurecr.io/${{ secrets.AzureAppService_ContainerUsername }}/nodejsimgapp:${{ github.sha }}
+        file: ./Dockerfile
 
     
